@@ -1,0 +1,25 @@
+{
+  "name": "serverless-twitter-app",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "api:deploy": "cd api && npm run deploy",
+    "api:install": "cd api && npm run install",
+    "api:remove": "cd api && npm run deploy:remove",
+    "client:deploy": "cd client && npm run deploy",
+    "client:install": "cd cleint && npm run install",
+    "client:remove": "cd client && npm run deploy:remove",
+    "deploy": "npm install && npm run api:deploy && npm run client:deploy",
+    "deploy:remove": "npm run api:remove && npm run client:remove",
+    "install": "npm run api:install && npm run client:install",
+    "start:dev": "cd client && npm run start:dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.cerner.com/VN052088/ServerlessTwitterLike.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {}
+}

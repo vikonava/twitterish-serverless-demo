@@ -1,0 +1,19 @@
+service: ServerlessTwitterClient
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+
+package:
+  individually: true
+
+plugins:
+  - serverless-finch
+
+custom:
+  client:
+    bucketName: twitterish-example.vikonava.com
+    distributionFolder: dist
+  webpack:
+    webpackConfig: 'webpack.dev.config.js'
+    includeModules: true

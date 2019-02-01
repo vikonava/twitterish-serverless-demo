@@ -1,0 +1,58 @@
+service: ServerlessTwitterApi
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  memorySize: 128
+  environment:
+    tablePrefix: ${self:service}-${opt:stage, self:provider.stage}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:PutItem
+        - dynamodb:Query
+      Resource:
+        - "Fn::GetAtt": [CommentsTable, Arn]
+    - Effect: Allow
+      Action:
+        - cognito-idp:ListUsers
+      Resource:
+        - "Fn::GetAtt": [CognitoUserPool, Arn]
+
+functions:
+  commentsIndex:
+    handler: src/comments/retrieveAll.main
+    events:
+      - http:
+          path: comments
+          method: get
+          cors: true
+          authorizer: aws_iam
+  commentsCreate:
+    handler: src/comments/create.main
+    events:
+      - http:
+          path: comments
+          method: post
+          cors: true
+          authorizer: aws_iam
+
+package:
+  individually: true
+
+plugins:
+  - serverless-webpack
+  - serverless-stack-output
+
+custom:
+  output:
+    file: ../client/config/aws.json
+  webpack:
+    webpackConfig: 'webpack.config.js'
+    includeModules: true
+
+resources:
+  - ${file(resources/api-gateway-errors.yml)}
+  - ${file(resources/cognito-user-pool.yml)}
+  - ${file(resources/cognito-identity-pool.yml)}
+  - ${file(resources/dynamodb-tables.yml)}
