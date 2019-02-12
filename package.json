@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "api:deploy": "cd api && npm run deploy",
-    "api:install": "cd api && npm run install",
+    "api:install": "cd api && npm install",
     "api:remove": "cd api && npm run deploy:remove",
     "client:deploy": "cd client && npm run deploy",
-    "client:install": "cd cleint && npm run install",
+    "client:install": "cd client && npm install",
     "client:remove": "cd client && npm run deploy:remove",
     "deploy": "npm install && npm run api:deploy && npm run client:deploy",
     "deploy:remove": "npm run api:remove && npm run client:remove",

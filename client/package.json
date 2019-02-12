@@ -43,7 +43,7 @@
   },
   "scripts": {
     "build:dist": "webpack --config webpack.prod.config.js -p",
-    "deploy": "npm run build:dist && sls client deploy --no-confirm" ,
+    "deploy": "npm run build:dist && sls client deploy --no-confirm",
     "deploy:remove": "sls client remove --no-confirm",
     "start:dev": "webpack-dev-server --progress --config webpack.dev.config.js"
   },
